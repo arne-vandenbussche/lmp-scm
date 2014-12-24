@@ -1,3 +1,13 @@
 .important {
 	background-color:yellow;
 }
+
+.linkButton { 
+                background: none;
+                border: none;
+                color: #0066ff;
+                text-decoration: underline;
+                 cursor: pointer; 
+            }
+            
+            

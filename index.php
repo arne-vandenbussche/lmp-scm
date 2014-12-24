@@ -1,7 +1,10 @@
 <?php
- $db = mysql_connect("localhost", "root", "")
-                    or die("Kan niet verbinden: " . mysql_error());
- $mydb=mysql_select_db("lmp-scm", $db); 
+namespace lmpscm;    
+use lmpscm\db;
+include_once './db/dbConnect.php';
+
+$connectionToLocalhost = db\connectionToLocalhost();
+$database = db\select_database(DBLMPSCM, $connectionToLocalhost);
 ?>
 <!DOCTYPE html>
 <!--
@@ -12,14 +15,9 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title>lmp-scm</title>
+        <link rel="stylesheet" type="text/css" href="css/screen.css">
         <style>
-            .linkButton { 
-                background: none;
-                border: none;
-                color: #0066ff;
-                text-decoration: underline;
-                 cursor: pointer; 
-            }
+            
         </style>
     </head>
     <body>
@@ -76,7 +74,7 @@ and open the template in the editor.
     </body>
 </html>
 <?php
- $mysql_close = mysql_close($db);
+ $mysql_close = mysql_close($connectionToLocalhost);
  if (!$mysql_close) {
      echo "Het sluiten van de database is niet gelukt: " . mysql_error(); 
  }
