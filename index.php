@@ -1,10 +1,11 @@
 <?php
 namespace lmpscm;    
 use lmpscm\db;
-include_once './db/dbConnect.php';
+use lmpscm\domain;
+include_once './db/dbPersoon.php';
+include_once './domain/Persoon.php';
 
-$connectionToLocalhost = db\connectionToLocalhost();
-$database = db\select_database(DBLMPSCM, $connectionToLocalhost);
+$dbPersoon = new db\DBPersoon();
 ?>
 <!DOCTYPE html>
 <!--
@@ -27,12 +28,10 @@ and open the template in the editor.
                 $naam = filter_input(INPUT_POST, "naam");
                 $voornaam = filter_input(INPUT_POST,"voornaam");
                 $email1 = filter_input(INPUT_POST,"email1");
-     
-                $sql = "INSERT into personen (naam, voornaam, email1) VALUES ('"
-                        .$naam."','".$voornaam."','".$email1."')";
-                if(!mysql_query($sql)){
-                    echo "De insertquery $sql heeft niet kunnen plaatsvinden. Foutmelding: " . mysql_error();
-                } 
+                $persoon = new domain\Persoon(0,$naam,1);
+                $persoon->setVoornaam($voornaam);
+                $persoon->setEmail1($email1);
+                $dbPersoon->insertPerson($persoon);
             }
         ?>
         <form method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>">
@@ -55,15 +54,14 @@ and open the template in the editor.
         <table border="1">
         
         <?php
-          $sql = "SELECT * FROM personen";
-            $resultaat = mysql_query($sql);
-            while ($rij = mysql_fetch_array($resultaat)) {
+          $personen = $dbPersoon->getPersons();
+          foreach($personen as $persoon){
         ?>
         
-            <tr><td><?php echo $rij["id"]." "; ?></td>
-                <td><?php echo $rij["naam"]." "; ?></td>
-                <td><?php echo $rij["voornaam"]." "; ?></td>
-                <td><?php echo $rij["email1"]; ?></td>
+            <tr><td><?php echo $persoon->getId(); ?></td>
+                <td><?php echo $persoon->getNaam(); ?></td>
+                <td><?php echo $persoon->getVoornaam(); ?></td>
+                <td><?php echo $persoon->getEmail1(); ?></td>
                 <td><input type="submit" class="linkButton" value="verwijder"/></td>
             </tr>                
           
@@ -74,7 +72,5 @@ and open the template in the editor.
     </body>
 </html>
 <?php
- $mysql_close = mysql_close($connectionToLocalhost);
- if (!$mysql_close) {
-     echo "Het sluiten van de database is niet gelukt: " . mysql_error(); 
- }
+ $dbPersoon->closeDbConnection();
+ unset($dbPersoon);

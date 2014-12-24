@@ -2,8 +2,6 @@
 namespace lmpscm\db;
 include_once('../dbconfig.php');
 
-define("DBLMPSCM","lmp-scm");
-
 function connectionToDbHost($host,$user,$password){
     $connection = mysql_connect($host, $user, $password)
                     or die("Kan niet verbinden: " . mysql_error());
