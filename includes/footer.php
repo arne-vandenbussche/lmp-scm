@@ -1,10 +1,3 @@
-<?php
-
-/* 
- * footer for the lmp application
- */
-?>
- 
  <a id="over"></a>
  <p>Deze applicatie werd ontwikkeld door Arne Vandenbussche. 
      Dit is nog een bètaversie.
@@ -12,9 +5,15 @@
 
  
 </div><!-- /.container --> 
+
+
  
-<script src="jss/jquery-1.11.2.min.js"></script>
-<script src="jss/bootstrap.min.js"></script>
+<script type="text/javascript" charset="utf8" src="js/jquery-1.11.2.min.js"></script>
+
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" charset="utf8" src="js/myScripts.js"></script>
 
 </body>
 </html>

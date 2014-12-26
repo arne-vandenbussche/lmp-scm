@@ -23,6 +23,7 @@ if ($post) {
     $dbPersoon->insertPerson($persoon);
 }
 ?>
+<div> <!-- formulier om elementen toe te voegen -->    
         <form method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>">
             <table border="0">
                 <tr>
@@ -40,7 +41,19 @@ if ($post) {
             </table>
             <input type="submit" name="toevoegen" value="Voeg persoon toe">
         </form>
-        <table border="1">
+</div> <!-- einde van het formulier -->
+    </br>
+ 
+<!-- tabel met personen -->
+    <table id="tblPersonen" class="display">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Naam</th>
+            <th>Voornaam</th>
+        </tr>
+        </thead>
+        <tbody>
         
         <?php
           $personen = $dbPersoon->getPersons();
@@ -50,16 +63,15 @@ if ($post) {
             <tr><td><?php echo $persoon->getId(); ?></td>
                 <td><?php echo $persoon->getNaam(); ?></td>
                 <td><?php echo $persoon->getVoornaam(); ?></td>
-                <td><?php echo $persoon->getEmail1(); ?></td>
-                <td><input type="submit" class="linkButton" value="verwijder"/></td>
             </tr>                
           
             <?php
         }
         ?>
-        </table>
-    </body>
-</html>
+            
+        </tbody>
+    </table> <!-- einde van de tabel met personen -->
+
 <?php
 
  $dbPersoon->closeDbConnection();
