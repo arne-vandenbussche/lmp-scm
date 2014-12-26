@@ -1,11 +1,4 @@
 <?php
-namespace lmpscm;    
-use lmpscm\db;
-include_once './db/dbConnect.php';
-
-$connectionToLocalhost = db\connectionToLocalhost();
-$database = db\select_database(DBLMPSCM, $connectionToLocalhost);
-
 session_start();
 /* 
  * Header voor de hoofdpagina
