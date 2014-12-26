@@ -10,4 +10,11 @@
                  cursor: pointer; 
             }
             
-            
+body {
+  padding-top: 50px;
+}
+
+.mijntitel {
+  padding: 40px 15px;
+  text-align: center;
+}          
