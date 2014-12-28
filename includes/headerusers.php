@@ -1,31 +1,26 @@
 <?php
+//session_start();
 /* 
- * Header voor de hoofdpagina
+ * Header voor de pagina voor het beheer van gebruikers
  */
 ?>
 <!doctype html>
-<html lang="nl">
+<html>
 <head>
-    <title>LMP contactgegevens</title>
+    <title>LMP gebruikersbeheer</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="lmp-scm">
     <link rel="icon" href="images/favicon.ico">
-    <meta name="author" content="Arne Vandenbussche">
     <link rel="stylesheet" type="text/css" href="css/screen.css">
-    
-    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
     <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
     
-    <!-- Custom styles for login page -->
-    <link href="./css/signin.css" rel="stylesheet">
     
 </head>
-<body>
+<body style="background-color: grey">
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -37,13 +32,12 @@
           </button>
           <a class="navbar-brand" href="#">LMP Contactgegevens</a>
         </div>
-          <p class="navbar-text">Welkom 
-              <?php if (isset($_SESSION['userFirstName'])){echo $_SESSION['userFirstName'];} ?></p>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#over">Over</a></li>
-            <?php if (isset($_SESSION['userFirstName'])){echo '<li><a href="uitloggen.php">Uitloggen</a></li>';} ?>
+            <li>Welkom <?php echo $_SESSION['userFirstName'] ?></li>
+            <li><a href="uitloggen.php">Uitloggen</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -54,9 +48,12 @@
      <div class="mijntitel">
         <h1>Beheer contactgegevens LMP</h1>
         <p class="lead">
-           Met deze webapplicatie beheer je de contactgegevens van de oud-leiding
-            (en sommige oud-leden) van chiro Knipoog - Sint-Elisabeth in Kortrijk.
+           Met deze webapplicatie beheer je de gebruikers van 
+           aplicatie voor het beheer van de de oud-leiding
+            (en sommige oud-leden) van chiro Knipoog - Sint-Elisabeth in 
+            Kortrijk.
         </p>
+        <p>Enkel toegankelijk voor beheerders.</p>
       </div> 
 
     

@@ -1,80 +1,51 @@
 <?php
-namespace lmpscm;    
-use lmpscm\db;
-use lmpscm\domain;
-include_once './db/dbPersoon.php';
-include_once './domain/Persoon.php';
+namespace lmpscm; 
+session_start();
+
+include_once './db/dbUser.php';
+include_once './domain/User.php';
 
 
-$dbPersoon = new db\DBPersoon();
-
-include_once 'includes/header.php';
-           
-
- 
-$post = filter_input(INPUT_POST, "toevoegen");
-if ($post) {
-    $naam = filter_input(INPUT_POST, "naam");
-    $voornaam = filter_input(INPUT_POST, "voornaam");
-    $email1 = filter_input(INPUT_POST, "email1");
-    $persoon = new domain\Persoon(0, $naam, 1);
-    $persoon->setVoornaam($voornaam);
-    $persoon->setEmail1($email1);
-    $dbPersoon->insertPerson($persoon);
+/**
+ * validates the user: does the user exist.
+ * @param $user type lmpscm\domain\USER
+ * @param $userName type string
+ * @param $password type $string
+ * @return true if user is correct, else false
+ */
+function validateUser($user,$userName,$password){
+    if (($user->getUserName() == $userName) && 
+            (password_verify($password,$user->getPasswordHash()))) {
+         return true;
+    }          
+    return false;
 }
-?>
-<div> <!-- formulier om elementen toe te voegen -->    
-        <form method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>">
-            <table border="0">
-                <tr>
-                    <td><label for="naam">Naam: *</label></td>
-                    <td><input type="text" name="naam" id="naam" required></td>
-                </tr>
-                <tr>
-                    <td><label for="voornaam">Voornaam: *</label></td>
-                    <td><input type="text" name="voornaam" id="voornaam" required></td>
-                </tr>
-                <tr>
-                    <td><label for="email1">E-mailadres 1:</label></td>
-                    <td><input type="email" name="email1" id="email1"></td>
-                </tr>
-            </table>
-            <input type="submit" name="toevoegen" value="Voeg persoon toe">
-        </form>
-</div> <!-- einde van het formulier -->
-    </br>
+
+$dbUser = new db\DbUser();
  
-<!-- tabel met personen -->
-    <table id="tblPersonen" class="display">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Naam</th>
-            <th>Voornaam</th>
-        </tr>
-        </thead>
-        <tbody>
-        
-        <?php
-          $personen = $dbPersoon->getPersons();
-          foreach($personen as $persoon){
-        ?>
-        
-            <tr><td><?php echo $persoon->getId(); ?></td>
-                <td><?php echo $persoon->getNaam(); ?></td>
-                <td><?php echo $persoon->getVoornaam(); ?></td>
-            </tr>                
-          
-            <?php
-        }
-        ?>
-            
-        </tbody>
-    </table> <!-- einde van de tabel met personen -->
+$userName = filter_input(INPUT_POST, "inputUserName",FILTER_SANITIZE_STRING);
+if ($userName) {
+    $password = (filter_input(INPUT_POST, "inputPassword"));
+    $user = $dbUser->getUser($userName);
+    if  (validateUser($user,$userName,$password)) {
+        $_SESSION['userName']=$userName;
+        $_SESSION['userFirstName']=$user->getFirstName();
+        $_SESSION['userLastName']=$user->getLastName();
+        $_SESSION['userEmail']=$user->getEmail();
+        $_SESSION['userRole']=$user->getRole();
+    }
+    //TO DO: remember me implementeren
+}
+   
+$dbUser->closeDbConnection();
 
-<?php
+require_once 'includes/header.php';
 
- $dbPersoon->closeDbConnection();
- unset($dbPersoon);
- include_once 'includes/footer.php';
+if (!isset($_SESSION['userName'])) { //gebruiker niet aangemeld
+    require_once './includes/inloggen.php';
+}
+else { //gebruiker is aangemeld
+    require_once './includes/managePersons.php';
+}
+require_once 'includes/footer.php';
 
