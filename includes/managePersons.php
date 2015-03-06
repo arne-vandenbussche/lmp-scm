@@ -6,8 +6,8 @@ include_once './domain/Persoon.php';
 
 
 $dbPersoon = new db\DBPersoon();
-
-$post = filter_input(INPUT_POST, "toevoegen");
+$personen = $dbPersoon->getPersons();
+/*$post = filter_input(INPUT_POST, "toevoegen");
 if ($post) {
     $naam = filter_input(INPUT_POST, "naam");
     $voornaam = filter_input(INPUT_POST, "voornaam");
@@ -16,10 +16,14 @@ if ($post) {
     $persoon->setVoornaam($voornaam);
     $persoon->setEmail1($email1);
     $dbPersoon->insertPerson($persoon);
-}
+} */
 ?>
-<div> <!-- formulier om elementen toe te voegen -->    
-        <form method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>">
+<script type="text/javascript">
+    var personen = JSON.parse( '<?php echo json_encode($personen); ?>' );
+ </script>
+<!--
+<div>  formulier om elementen toe te voegen    
+        <form method="post" action="<?php //echo $_SERVER["PHP_SELF"] ?>">
             <table border="0">
                 <tr>
                     <td><label for="naam">Naam: *</label></td>
@@ -36,37 +40,33 @@ if ($post) {
             </table>
             <input type="submit" name="toevoegen" value="Voeg persoon toe">
         </form>
-</div> <!-- einde van het formulier -->
-    </br>
- 
+</div>  einde van het formulier -->
+
+<div class="row"> <!-- rij met tabel van personen links en rechts detail -->
+    <div class="col-md-6"> <!-- linkerkolom met de tabel -->
 <!-- tabel met personen -->
     <table id="tblPersonen" class="display">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Naam</th>
             <th>Voornaam</th>
         </tr>
         </thead>
-        <tbody>
-        
-        <?php
-          $personen = $dbPersoon->getPersons();
-          foreach($personen as $persoon){
-        ?>
-        
-            <tr><td><?php echo $persoon->getId(); ?></td>
-                <td><?php echo $persoon->getNaam(); ?></td>
-                <td><?php echo $persoon->getVoornaam(); ?></td>
-            </tr>                
-          
-            <?php
-        }
-        ?>
-            
+        <tbody>   
         </tbody>
     </table> <!-- einde van de tabel met personen -->
-
+    </div> <!-- einde van de linkerkolom met de tabel -->
+    
+    <div class="col-md-6"> <!-- rechterkolom met de detailgegevens -->
+        <p>Detailgegevens</p>
+        <div id="persoonDetail">
+            
+        </div>
+        <form>
+            <input type="text" id="familienaam" name="familienaam">
+        </form>
+    </div> <!-- einde van detailgegevens -->
+</div> <!-- einde van de rij met de tabel van personen links en detail rechts -->
 <?php
 
  $dbPersoon->closeDbConnection();

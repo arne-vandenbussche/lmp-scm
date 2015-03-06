@@ -6,7 +6,7 @@
 
 namespace lmpscm\db;
 use lmpscm\domain;
-include_once 'dbConnect.php';
+require_once('../dbconfig.php');
 include_once './domain/User.php';
 
 /**
@@ -16,20 +16,14 @@ include_once './domain/User.php';
  */
 class DbUser {
     
-     const DBLMPSCM = "lmp-scm";
-    
-    private $databaseName = NULL;
     private $dbConnection = \NULL;
-    private $database = \NULL;
     
     /*
      * Opent databaseconnectie en selecteert correcte database
      */
     function __construct() {
         try {
-            $this->dbConnection = connectionToLocalhost();
-            $this->databaseName = self::DBLMPSCM;
-            $this->database = select_database($this->databaseName, $this->dbConnection);
+            $this->dbConnection = new \mysqli(DBSERVER, DBUSER, DBPASSWORD, DATABASE);
         } catch (Exception $ex) {
             echo('FOUT: '.$e->getMessage());
         }
@@ -40,16 +34,7 @@ class DbUser {
      * closes database connection if it is still open
      */
     function closeDbConnection() {
-        if($this->dbConnection <> NULL && is_resource($this->dbConnection) 
-                && get_resource_type($this->dbConnection) === 'mysql link')
-        {
-            return mysql_close($this->dbConnection);
-        }
-        else
-        {
-            echo "Seems to be closed already";
-            return false;
-        }
+         $this->dbConnection->close();
     }
     
     function getUsers(){

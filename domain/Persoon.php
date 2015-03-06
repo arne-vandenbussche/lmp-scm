@@ -6,7 +6,7 @@ namespace lmpscm\domain;
  *
  * @author arnevandenbussche
  */
-class Persoon {
+class Persoon implements \JsonSerializable{
     
     private $id;
     private $naam;
@@ -28,6 +28,23 @@ class Persoon {
         $this->valid = $valid;
     }
     
+    public function jsonSerialize() {
+        return [
+            'id' => $this->getId(),
+            'naam' => $this->getNaam(),
+            'voornaam' => $this->getVoornaam(),
+            'adres' => $this->getAdres(),
+            'postnummer' => $this->getPostnummer(),
+            'gemeente' => $this->getGemeente(),
+            'land' => $this->getLand(),
+            'email1' => $this->getEmail1(),
+            'email2' => $this->getEmail2(),
+            'telefoon' => $this->getTelefoon(),
+            'jaarAfwaai' => $this->getJaarAfzwaai(),
+            'opmerkingen' => $this->getOpmerkingen(),
+            'valid' => $this->getValid()
+        ];
+    }
     function getId() {
         return $this->id;
     }
