@@ -3,7 +3,7 @@ namespace lmpscm\db;
 use lmpscm\domain;
 require_once('../dbconfig.php');
 require_once './domain/Persoon.php';
-
+require_once 'dbConnect.php';
 /**
  * Klasse om persoonobjecten in de database bij te werken
  * De connectie naar de database wordt geopend en de database wordt
@@ -21,27 +21,22 @@ class DBPersoon {
      * Opent databaseconnectie en selecteert correcte database
      */
     function __construct() {
-        try {
-            $this->dbConnection = new \mysqli(DBSERVER, DBUSER, DBPASSWORD, DATABASE);
-        } catch (Exception $ex) {
-            echo('FOUT: '.$e->getMessage());
-        }
-        
+        $this->dbConnection = connectionToDatabase();  
     }
     
     /*
      * closes database connection if it is still open
      */
     function closeDbConnection() {
-        $this->dbConnection.close();
+        $this->dbConnection->close();
     }
     
     function getPersons(){
         $sql = "SELECT * FROM personen";
-        $resultaat = mysql_query($sql);
+        $resultaat = $this->dbConnection->query($sql);
         $personen = [];
         $i=0;
-        while ($rij = mysql_fetch_array($resultaat)) {
+        while ($rij = $resultaat->fetch_assoc()) {
               $id = $rij["id"];
               $naam = $rij['naam'];
               $voornaam = $rij['voornaam'];
@@ -61,8 +56,8 @@ class DBPersoon {
                     .$persoon->getNaam()."','"
                     .$persoon->getVoornaam()."','"
                     .$persoon->getEmail1()."')";
-        if(!mysql_query($sql)){
-            echo "De insertquery $sql heeft niet kunnen plaatsvinden. Foutmelding: " . mysql_error();
+        if(!$this->dbConnection->query($sql)){
+            echo "De insertquery $sql heeft niet kunnen plaatsvinden. Foutmelding: " . $this->dbConnection->error;
         }
     }
 }

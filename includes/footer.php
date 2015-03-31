@@ -1,8 +1,9 @@
- <a id="over"></a>
+<div>
+<a id="over"></a>
  <p>Deze applicatie werd ontwikkeld door Arne Vandenbussche. 
      Dit is nog een bètaversie.
  </p>
-
+</div>
  
 </div><!-- /.container --> 
 

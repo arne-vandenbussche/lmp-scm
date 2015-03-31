@@ -4,7 +4,9 @@ include_once('../dbconfig.php');
 
 function connectionToDatabase(){
     $connection = new \mysqli(DBSERVER, DBUSER, DBPASSWORD, DATABASE);
-    /*$connection = mysql_connect($host, $user, $password)
-                    or die("Kan niet verbinden: " . mysql_error()); */
+    if ($connection->connect_errno) {
+        echo "Failed to connect to MySQL: " . $connection->connect_error;
+    }
+        
     return $connection;
 }
