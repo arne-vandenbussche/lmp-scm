@@ -38,9 +38,49 @@ function () {
         var rijgegevens = ( table.row( this ).data() );
         //index geeft de werkelijke index in de array. Handig.
         var index = (table.row(this)).index();
-        $('#persoonDetail').text(index+": "+rijgegevens.naam +" "+rijgegevens.voornaam+" "+rijgegevens.email1);
-        $('#familienaam').val(rijgegevens.naam);
+        //$('#persoonDetail').text(index+": "+rijgegevens.naam +" "+rijgegevens.voornaam+" "+rijgegevens.email1);
+        $('#editnaam').val(rijgegevens.naam);
+        $('#editvoornaam').val(rijgegevens.voornaam);
+        $('#editemail1').val(rijgegevens.email1);
     } );
+    
+    formNewPersonRestore();
+    hideMessages();
+    
+    $('#buttonNewPerson').on('click', function() {
+        $('#formnewperson').show();
+        $('#buttonNewPerson').hide();
+    });
+    
+    $('#newPersonCancel').on('click', function() {
+        formNewPersonRestore();
+    })
+    
+    $('#newPersonSave').on('click', function() {
+        formNewPersonRestore();
+        saveNewPerson();
+    })
   
 } );
 
+function formNewPersonRestore() {
+    $('#buttonNewPerson').show();
+    $('#formnewperson').hide();
+}
+
+function showMessageSuccesSave(){
+    
+}
+
+function saveNewPerson(){
+    $.ajax({
+        type:"post",
+        url:"db/savePerson.php",
+        data: {naam: x, voornaam:y},
+        success: showMessageSuccesSave
+    });
+}
+
+function hideMessages(){
+    
+}

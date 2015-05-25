@@ -37,13 +37,16 @@ class DBPersoon {
         $personen = [];
         $i=0;
         while ($rij = $resultaat->fetch_assoc()) {
-              $id = $rij["id"];
-              $naam = $rij['naam'];
-              $voornaam = $rij['voornaam'];
-              $email1 = $rij['email1'];
-              $persoon = new domain\Persoon($id, $naam, 1);
-              $persoon ->setVoornaam($voornaam);
-              $persoon ->setEmail1($email1);
+              $persoon = new domain\Persoon($rij["id"], $rij['naam'], 1);
+              $persoon ->setVoornaam($rij['voornaam']);
+              $persoon ->setAdres($rij['adres']);
+              $persoon ->setGemeente($rij['gemeente']);
+              $persoon ->setPostnummer($rij['postnummer']);
+              $persoon ->setLand($rij['land']);
+              $persoon ->setTelefoon($rij['telefoon']);
+              $persoon ->setEmail1($rij['email1']);
+              $persoon ->setEmail2($rij['email2']);
+              $persoon ->setJaarAfzwaai($rij['jaarAfzwaai']);
               $personen[$i] = $persoon;
               $i++;
         }
