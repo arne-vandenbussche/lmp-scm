@@ -1,6 +1,9 @@
 <?php
 /* 
- * Header voor de hoofdpagina
+ * Header voor de hoofdpagina.
+ * Bevat de head-sectie met verwijzingen naar de juiste stylesheets.
+ * Wordt gebruikt in combinatie met footer.
+ * Bevat ook het hoofdmenu, en de basisindeling.
  */
 ?>
 <!doctype html>
