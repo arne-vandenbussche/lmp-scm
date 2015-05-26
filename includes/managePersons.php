@@ -23,86 +23,93 @@ $personen = $dbPersoon->getPersons();
 <script type="text/javascript">
     var personen = JSON.parse('<?php echo json_encode($personen); ?>');
 </script>
-<div class="row" style="padding:10px;" id="buttonNewPerson">
-    <button type="button" class="btn btn-primary col-sm-6">Voeg een persoon toe</button>
-</div>
-<div class="row"> <!-- toevoegen nieuwe gebruiker -->
-    <form class="form-horizontal col-sm-6" id="formnewperson">
-        <h3>Een persoon toevoegen</h3>
-        <div class="form-group">
-            <label for="newnaam" class="col-sm-4 control-label">Naam: *</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="text" name="newnaam" id="newnaam" required>
+<!-- persoon toevoegen -->
+<div class="row">
+    <div class="row" id="buttonNewPerson">
+        <button type="button" class="btn btn-primary col-sm-6">Voeg een persoon toe</button>
+    </div>
+    <!-- formulier toevoegen nieuwe gebruiker -->
+    <div class="row">
+        <form class="form-horizontal col-sm-6" id="formnewperson">
+            <h3>Een persoon toevoegen</h3>
+            <div class="form-group">
+                <label for="newnaam" class="col-sm-4 control-label">Naam: *</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="newnaam" id="newnaam" required>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="newvoornaam" class="col-sm-4 control-label">Voornaam: *</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="text" name="newvoornaam" id="newvoornaam" required>
+            <div class="form-group">
+                <label for="newvoornaam" class="col-sm-4 control-label">Voornaam: *</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="newvoornaam" id="newvoornaam" required>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="newadres" class="col-sm-4 control-label">Adres:</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="text" name="newadres" id="newadres">
+            <div class="form-group">
+                <label for="newadres" class="col-sm-4 control-label">Adres:</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="newadres" id="newadres">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="newpostnummer" class="col-sm-4 control-label">Postnummer:</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="text" name="newpostnummer" id="newpostnummer">
+            <div class="form-group">
+                <label for="newpostnummer" class="col-sm-4 control-label">Postnummer:</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="newpostnummer" id="newpostnummer">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="newgemeente" class="col-sm-4 control-label">Gemeente:</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="text" name="newgemeente" id="newgemeente">
+            <div class="form-group">
+                <label for="newgemeente" class="col-sm-4 control-label">Gemeente:</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="newgemeente" id="newgemeente">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="newland" class="col-sm-4 control-label">Land:</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="text" name="newland" id="newland">
+            <div class="form-group">
+                <label for="newland" class="col-sm-4 control-label">Land:</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="newland" id="newland">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="newemail1" class="col-sm-4 control-label">E-mailadres 1:</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="email" name="newemail1" id="newemail1">
+            <div class="form-group">
+                <label for="newemail1" class="col-sm-4 control-label">E-mailadres 1:</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="email" name="newemail1" id="newemail1">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="newemail2" class="col-sm-4 control-label">E-mailadres 2:</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="email" name="newemail2" id="newemail2">
+            <div class="form-group">
+                <label for="newemail2" class="col-sm-4 control-label">E-mailadres 2:</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="email" name="newemail2" id="newemail2">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="newtelefoon" class="col-sm-4 control-label">Telefoon:</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="text" name="newtelefoon" id="newtelefoon">
+            <div class="form-group">
+                <label for="newtelefoon" class="col-sm-4 control-label">Telefoon:</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="newtelefoon" id="newtelefoon">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="newjaarafzwaai" class="col-sm-4 control-label">Jaar afzwaai</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="number" name="newjaarafzwaai" id="newjaarafzwaai">
+            <div class="form-group">
+                <label for="newjaarafzwaai" class="col-sm-4 control-label">Jaar afzwaai</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="number" name="newjaarafzwaai" id="newjaarafzwaai">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="newopmerkingen" class="col-sm-4 control-label">Opmerkingen:</label>
-            <div class="col-sm-8">
-                <input class="form-control" type="textarea" name="newopmerkingen" id="newopmerkingen">
+            <div class="form-group">
+                <label for="newopmerkingen" class="col-sm-4 control-label">Opmerkingen:</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="textarea" name="newopmerkingen" id="newopmerkingen">
+                </div>
             </div>
-        </div>
-        <button type="button" class="btn btn-default" id="newPersonCancel">Annuleren</button>
-        <button type="button" class="btn btn-primary" id="newPersonSave">Opslaan</button>
-
-    </form>
-</div>
+            <button type="button" class="btn btn-default" id="newPersonCancel">Annuleren</button>
+            <button type="button" class="btn btn-primary" id="newPersonSave">Opslaan</button>
+        </form>
+    </div>
+</div> <!-- einde persoon toevoegen -->
 
 <div class="row"> <!-- rij met tabel van personen links en rechts detail -->
     <div class="col-md-6"> <!-- linkerkolom met de tabel -->
+        <h3>Lijst oud-leiding en oud-leden</h3>
+        <p>Klik op een persoon om rechts de detailsgegevens te zien of te 
+            bewerken.</p>
+        <p>Je kan de personen sorteren door op de kolomkoppen te klikken.</p>
         <!-- tabel met personen -->
         <table id="tblPersonen" class="display">
             <thead>
