@@ -22,3 +22,12 @@ body {
 #buttonNewPerson {
     padding: 10px;
 }
+
+#messageBox {
+    padding: 10px;
+}
+#messageBoxSucces {
+    background-color: lightgreen;
+    color:white;
+    border-radius: 5px;
+}

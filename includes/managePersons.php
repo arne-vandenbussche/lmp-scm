@@ -25,6 +25,9 @@ $personen = $dbPersoon->getPersons();
 </script>
 <!-- persoon toevoegen -->
 <div class="row">
+    <div class="row" id="messageBox">
+        <div class="col-sm-6" id="messageBoxSucces">Dit is een boodschap</div>
+    </div>
     <div class="row" id="buttonNewPerson">
         <button type="button" class="btn btn-primary col-sm-6">Voeg een persoon toe</button>
     </div>

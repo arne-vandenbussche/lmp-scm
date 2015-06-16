@@ -68,19 +68,20 @@ function formNewPersonRestore() {
     $('#formnewperson').hide();
 }
 
-function showMessageSuccesSave(){
-    
+function showMessageSuccesSave(data, status){
+    $('#messageBoxSucces').text(data);
+    $('#messageBoxSucces').show().delay(2000).fadeOut();;
 }
 
 function saveNewPerson(){
     $.ajax({
         type:"post",
         url:"db/savePerson.php",
-        data: {naam: x, voornaam:y},
+        data: {naam: "Peter", voornaam:"Thiers"},
         success: showMessageSuccesSave
     });
 }
 
 function hideMessages(){
-    
+    $('#messageBoxSucces').hide();
 }
