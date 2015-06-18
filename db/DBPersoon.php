@@ -55,10 +55,15 @@ class DBPersoon {
 
     function insertPerson($persoon) {
         // to do: andere waarden invullen
-        $sql = "INSERT into personen (naam, voornaam, email1) VALUES ('"
+        $sql = "INSERT into personen (naam, voornaam, adres, ,postnummer, "
+                . "gemeente, email1) VALUES ('"
                     .$persoon->getNaam()."','"
                     .$persoon->getVoornaam()."','"
-                    .$persoon->getEmail1()."')";
+                    .$persoon->getAdres()."','"
+                    .$persoon->getPostnummer()."','"
+                    .$persoon->getGemeente()."','"
+                    .$persoon->getEmail1().
+                "')";
         if(!$this->dbConnection->query($sql)){
             echo "De insertquery $sql heeft niet kunnen plaatsvinden. Foutmelding: " . $this->dbConnection->error;
         }
