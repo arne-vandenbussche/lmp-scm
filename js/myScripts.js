@@ -1,4 +1,13 @@
 $(document).ready( 
+/* to do: deze functie wordt elke keer geladen, ook bij inloggen bijvoorbeeld,
+ * terwijl hij enkel bij managePersons geladen moet worden en dan nog eigenlijk
+ * als de parsing is gebeurd van de personen.
+ * Ofwel laden we die op het juiste moment, en niet eerder
+ * ofwel maken we dit hele scriptbestand specifiek voor managePersons.php en
+ * niet in de algemene header.
+ * Nu treedt er een javascript-error op die verder geen invloed heeft.
+ *
+ */
 function () {
     var table = $('#tblPersonen').DataTable({
         data: personen,
