@@ -79,14 +79,16 @@ function formNewPersonRestore() {
 
 function showMessageSuccesSave(data, status){
     $('#messageBoxSucces').text(data);
-    $('#messageBoxSucces').show().delay(2000).fadeOut();;
+    $('#messageBoxSucces').show().delay(15000).fadeOut();;
 }
 
 function saveNewPerson(){
+    var naam = $('#newnaam').val();
+    var voornaam = $('#newvoornaam').val();
     $.ajax({
         type:"post",
         url:"db/savePerson.php",
-        data: {naam: "Peter", voornaam:"Thiers"},
+        data: {naam: naam, voornaam: voornaam},
         success: showMessageSuccesSave
     });
 }
